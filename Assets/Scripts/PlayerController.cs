@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private GameObject focalPoint;
-    [SerializeField]private float speed = 10f;
+    [SerializeField]private float speed = 100f;
     [SerializeField]private float gravityModifier = 1f;
 
     private bool hasPowerup = false;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(forward * forwardInput * speed);
 
-        if (transform.position.y < -5)
+        if (transform.position.y < -10)
         {
             Debug.Log("Game Over!");
         }
@@ -50,9 +50,9 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Powerup"))
         {
             hasPowerup = true;
-            powerupIndicator.SetActive(true);
             Destroy(other.gameObject);
 
+            powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCountdownRoutine());
         }
     }

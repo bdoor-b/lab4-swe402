@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour
         float spawnRange = 9.0f;
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
-        return new Vector3(spawnPosX, 1f, spawnPosZ);
+        return new Vector3(spawnPosX, 1.5f, spawnPosZ);
     }
 
     void StopSpawning()
