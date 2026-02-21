@@ -3,8 +3,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    Rigidbody rb;
-    [SerializeField]private float speed = 5.0f;
+    private Rigidbody rb;
+    [SerializeField]private float speed = 200f;
     private GameObject player;
 
     void Start()
@@ -16,10 +16,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-        rb.AddForce(lookDirection * speed);
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        rb.AddForce(direction * speed);
 
-        if (transform.position.y < -5)
+        if (transform.position.y < -10)
         {
             Destroy(gameObject);
         }
