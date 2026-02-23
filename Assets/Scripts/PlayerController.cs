@@ -14,35 +14,27 @@ public class PlayerController : MonoBehaviour
     private bool hasPowerup = false;
     public GameObject powerupIndicator;
     private float powerupStrength = 15.0f;
+    public AudioClip powerupSound;
+    private AudioSource playerAudio;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        focalPoint = GameObject.Find("Focal Point"); 
+        playerAudio = GetComponent<AudioSource>();
+        Physics.gravity *= gravityModifier;    
 
-        focalPoint = GameObject.Find("Focal Point");     
-
-        Physics.gravity *= gravityModifier;
-        powerupIndicator.SetActive(false);  
-
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         // Get the vertical input (W/S or Up/Down arrow keys)
-        float forwardInput = Input.GetAxis("Vertical");
-        Vector3 forward = focalPoint.transform.forward;
-        forward.y = 0; 
-        forward.Normalize();
+        float verticalInput = Input.GetAxis("Vertical");
+        rb.AddForce(focalPoint.transform.forward * verticalInput * speed);
 
-        rb.AddForce(forward * forwardInput * speed);
-
-        if (transform.position.y < -10)
-        {
-            Debug.Log("Game Over!");
-        }
+    
     }
 
     void OnTriggerEnter(Collider other)
@@ -51,9 +43,9 @@ public class PlayerController : MonoBehaviour
         {
             hasPowerup = true;
             Destroy(other.gameObject);
-
-            powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCountdownRoutine());
+            powerupIndicator.gameObject.SetActive(true);
+
         }
     }
 
@@ -61,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         hasPowerup = false;
-        powerupIndicator.SetActive(false);
+        powerupIndicator.gameObject.SetActive(false);
     }
 
     void OnCollisionEnter(Collision other)
@@ -70,7 +62,6 @@ public class PlayerController : MonoBehaviour
         {
             Rigidbody enemyRigidbody = other.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer = (other.gameObject.transform.position - transform.position).normalized;
-
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
         }
     }

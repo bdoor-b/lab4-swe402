@@ -9,19 +9,17 @@ public class SpawnManager : MonoBehaviour
     private int enemyCount;
     private int waveNumber = 1;
     private bool gameActive = true;
+    public float spawnRange = 9.0f;
     void Start()
     {
-        SpawnEnemyWave(waveNumber);
         SpawnPowerup();
-        
+        SpawnEnemyWave(waveNumber);        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameActive) return;
-
-        enemyCount = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;        
+        enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;        
         
         if(enemyCount == 0)
         {
@@ -45,10 +43,9 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 GenerateSpawnPosition()
     {
-        float spawnRange = 9.0f;
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
-        return new Vector3(spawnPosX, 1.5f, spawnPosZ);
+        return new Vector3(spawnPosX, 0.3f, spawnPosZ);
     }
 
     void StopSpawning()

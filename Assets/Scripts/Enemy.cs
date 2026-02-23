@@ -4,22 +4,22 @@ public class Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Rigidbody rb;
-    [SerializeField]private float speed = 200f;
+    [SerializeField]private float speed = 3f;
     private GameObject player;
-    Vector3 direction;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
-        direction = (player.transform.position - transform.position).normalized;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.AddForce(direction * speed);
+        Vector3  lookDirection = (player.transform.position - transform.position).normalized;
+
+        rb.AddForce(lookDirection * speed);
 
         if (transform.position.y < -10)
         {
