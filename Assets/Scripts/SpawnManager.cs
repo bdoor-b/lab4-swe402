@@ -10,8 +10,10 @@ public class SpawnManager : MonoBehaviour
     private int waveNumber = 1;
     private bool gameActive = true;
     public float spawnRange = 9.0f;
+
     void Start()
     {
+
         SpawnPowerup();
         SpawnEnemyWave(waveNumber);        
     }
@@ -19,6 +21,8 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameActive) return;
+        
         enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;        
         
         if(enemyCount == 0)

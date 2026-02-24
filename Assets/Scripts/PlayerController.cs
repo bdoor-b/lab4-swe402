@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private float powerupStrength = 15.0f;
     public AudioClip powerupSound;
     private AudioSource playerAudio;
+    public ParticleSystem collectionParticle;
+    private Animator powerupAnim;
+
 
 
     void Start()
@@ -23,7 +26,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point"); 
         playerAudio = GetComponent<AudioSource>();
-        Physics.gravity *= gravityModifier;    
+        Physics.gravity *= gravityModifier;
+       
 
     }
 
@@ -42,9 +46,13 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Powerup"))
         {
             hasPowerup = true;
-            Destroy(other.gameObject);
+            collectionParticle.Play();
+            playerAudio.PlayOneShot(powerupSound, 1.0f);
             StartCoroutine(PowerupCountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
+            Destroy(other.gameObject);
+
+
 
         }
     }
@@ -58,12 +66,17 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+     
+    
         if(other.gameObject.CompareTag("Enemy") && hasPowerup)
         {
+       
             Rigidbody enemyRigidbody = other.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer = (other.gameObject.transform.position - transform.position).normalized;
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
         }
+     
+
     }
 
 }
