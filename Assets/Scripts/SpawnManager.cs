@@ -4,12 +4,12 @@ public class SpawnManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public GameObject enemyPrefab;
-    public GameObject powerupPrefab;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject powerupPrefab;
     private int enemyCount;
     private int waveNumber = 1;
     private bool gameActive = true;
-    public float spawnRange = 9.0f;
+    private float spawnRange = 9.0f;
 
     void Start()
     {

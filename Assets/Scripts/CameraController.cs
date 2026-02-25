@@ -4,7 +4,8 @@ public class CameraController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public float rotationSpeed = 100.0f;
+    [Range(50f, 200f)]
+    [SerializeField] private float rotationSpeed = 100.0f;
     private float horizontalInput;
   
 

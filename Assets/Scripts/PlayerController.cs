@@ -8,17 +8,21 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private GameObject focalPoint;
+
+    [Range(10f, 200f)] 
+    [Tooltip("Controls the speed of the player.")]
     [SerializeField]private float speed = 100f;
+
+    [Range(1f, 5f)]
+    [Tooltip("Multiplies global gravity to make the player feel heavier and less floaty.")]
     [SerializeField]private float gravityModifier = 1f;
 
     private bool hasPowerup = false;
-    public GameObject powerupIndicator;
+    [SerializeField] private GameObject powerupIndicator;
     private float powerupStrength = 15.0f;
-    public AudioClip powerupSound;
+    [SerializeField] private AudioClip powerupSound;
     private AudioSource playerAudio;
-    public ParticleSystem collectionParticle;
-    private Animator powerupAnim;
-
+    [SerializeField] private ParticleSystem collectionParticle;
 
 
     void Start()
