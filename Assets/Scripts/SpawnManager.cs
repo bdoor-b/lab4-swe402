@@ -8,31 +8,41 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject powerupPrefab;
     private int enemyCount;
     private int waveNumber = 1;
-    private bool gameActive = true;
-    private float spawnRange = 9.0f;
+    private GameManager gameManager;
+
+    [Range(5f, 15f)]
+    [Tooltip("The maximum distance from the center where enemies and powerups can spawn.")]
+    [SerializeField] private float spawnRange = 9.0f;
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
+    public void BeginGame(int difficulty)
+    {
+        waveNumber = 1;
+        SpawnEnemyWave(waveNumber * difficulty);
         SpawnPowerup();
-        SpawnEnemyWave(waveNumber);        
+        gameManager.UpdateWaveUI(waveNumber);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameActive) return;
-        
-        enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;        
-        
-        if(enemyCount == 0)
+        if (!gameManager.IsGameActive()) return;
+
+        enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;
+
+        if (enemyCount == 0)
         {
             waveNumber++;
             SpawnEnemyWave(waveNumber);
+            gameManager.UpdateWaveUI(waveNumber);
             SpawnPowerup();
         }
     }
-      void SpawnPowerup()
+    void SpawnPowerup()
     {
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
@@ -54,7 +64,12 @@ public class SpawnManager : MonoBehaviour
 
     void StopSpawning()
     {
-        gameActive = false;
+        GameObject[] remainingEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in remainingEnemies)
+        {
+            Destroy(enemy);
+        }
     }
 
     void OnEnable()

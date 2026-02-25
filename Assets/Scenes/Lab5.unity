@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 54574913}
+  - component: {fileID: 54574914}
   m_Layer: 5
   m_Name: TitleScreen
   m_TagString: Untagged
@@ -158,6 +159,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 336}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &54574914
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54574912}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &157517182
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +183,7 @@ GameObject:
   - component: {fileID: 157517186}
   - component: {fileID: 157517185}
   - component: {fileID: 157517184}
+  - component: {fileID: 157517187}
   m_Layer: 5
   m_Name: HardButton
   m_TagString: Untagged
@@ -279,6 +293,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157517182}
   m_CullTransparentMesh: 1
+--- !u!114 &157517187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157517182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5264667e260fa4a73b011ce2adaceaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyButton
+  difficulty: 3
 --- !u!1 &231398687
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +318,7 @@ GameObject:
   - component: {fileID: 231398691}
   - component: {fileID: 231398690}
   - component: {fileID: 231398689}
+  - component: {fileID: 231398692}
   m_Layer: 5
   m_Name: EasyButton
   m_TagString: Untagged
@@ -400,6 +428,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231398687}
   m_CullTransparentMesh: 1
+--- !u!114 &231398692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231398687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5264667e260fa4a73b011ce2adaceaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  difficulty: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,6 +1403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
   enemyPrefab: {fileID: 2418328331463962885, guid: b363a0c1d162245c39f2346bd81ff66d, type: 3}
   powerupPrefab: {fileID: 1039247027992969275, guid: 0048bb0c0ab2543d8be0500c7540fa43, type: 3}
+  spawnRange: 9
 --- !u!1 &673429842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1847,7 @@ GameObject:
   - component: {fileID: 984460126}
   - component: {fileID: 984460128}
   - component: {fileID: 984460127}
+  - component: {fileID: 984460129}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -1930,6 +1973,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984460125}
   m_CullTransparentMesh: 1
+--- !u!225 &984460129
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984460125}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1020309679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,7 +2114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 10
-  gravityModifier: 1
+  gravityModifier: 1.98
   powerupIndicator: {fileID: 636864668}
   powerupSound: {fileID: 8300000, guid: 321fd36892ccd45338e697ded2883eaa, type: 3}
   collectionParticle: {fileID: 851308169}
@@ -2572,6 +2627,7 @@ GameObject:
   - component: {fileID: 1617097519}
   - component: {fileID: 1617097518}
   - component: {fileID: 1617097517}
+  - component: {fileID: 1617097520}
   m_Layer: 5
   m_Name: MediumButton
   m_TagString: Untagged
@@ -2681,6 +2737,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617097515}
   m_CullTransparentMesh: 1
+--- !u!114 &1617097520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617097515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5264667e260fa4a73b011ce2adaceaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyButton
+  difficulty: 2
 --- !u!1 &1963553477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,7 +2832,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1963553480}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 409769170}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1963553480
 MonoBehaviour:
   m_ObjectHideFlags: 0

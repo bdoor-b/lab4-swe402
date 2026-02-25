@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private GameObject focalPoint;
 
-    [Range(10f, 200f)] 
     [Tooltip("Controls the speed of the player.")]
     [SerializeField]private float speed = 100f;
 
@@ -39,8 +38,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Get the vertical input (W/S or Up/Down arrow keys)
-        float verticalInput = Input.GetAxis("Vertical");
-        rb.AddForce(focalPoint.transform.forward * verticalInput * speed);
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        if(gm.IsGameActive()){
+
+            float verticalInput = Input.GetAxis("Vertical");
+            rb.AddForce(focalPoint.transform.forward * verticalInput * speed);
+        }
+
+        if (transform.position.y < -10 && gm.IsGameActive())
+        {
+            gm.GameOver();
+        }
 
     
     }

@@ -6,11 +6,14 @@ public class Enemy : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]private float speed = 3f;
     private GameObject player;
+    private GameManager gm;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
 
     }
 
@@ -23,6 +26,7 @@ public class Enemy : MonoBehaviour
 
         if (transform.position.y < -10)
         {
+            gm.UpdateScore(5);
             Destroy(gameObject);
         }
         
